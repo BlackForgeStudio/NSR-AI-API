@@ -1,0 +1,76 @@
+name: 🐞 API Bug Report
+description: Report a problem with the NSR-AI API
+title: "[API BUG] - "
+labels: ["api", "bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📝 API Bug Description
+        Provide a clear and concise description of the API issue.
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: 🔗 Endpoint
+      placeholder: e.g., POST /v1/chat
+    validations:
+      required: true
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: 📡 HTTP Method
+      options:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+    validations:
+      required: true
+
+  - type: input
+    id: api_version
+    attributes:
+      label: 📦 API Version
+      placeholder: e.g., v1.3.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: request_payload
+    attributes:
+      label: 📤 Request Payload
+      description: Paste the JSON body you sent (remove API keys).
+      render: json
+      placeholder: |
+        {
+          "model": "nsr-ai-pro",
+          "prompt": "Hello"
+        }
+
+  - type: textarea
+    id: response
+    attributes:
+      label: 📥 Response Received
+      description: Include status code and response body.
+      render: json
+      placeholder: |
+        Status: 500
+        {
+          "error": "Internal server error"
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 🎯 Expected Response
+      description: What response should have been returned?
+      placeholder: Status 200 with AI-generated text.
+    validations:
+      required: true
