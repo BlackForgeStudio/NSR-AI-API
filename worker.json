@@ -20,7 +20,7 @@
     "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/security/security-3.5.jar"
   },
   "bugfix_mapping": {
-    "1.5": {
+    "1.4": {
       "version": "1.4",
       "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/bug/NSR-AI-1.4/NSR-AI-1.4.jar",
       "restart_required": true
