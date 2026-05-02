@@ -584,8 +584,6 @@ After implementing your `AIAddon` class and configuring `addon.yml` (if using le
 
 ## 6. Addon Command Guidelines
 
-## 7. Addon Command Guidelines
-
 To prevent conflicts with the core plugin's commands and to ensure a consistent user experience, all addons must follow these command registration rules:
 
 ### Standard Addon Commands
@@ -605,11 +603,11 @@ In specific cases, you may register a sub-command under the main `/ai` command (
 
 Failure to follow these guidelines may result in your addon being blocked by the core plugin's security manager.
 
-## 8. Further Assistance
+## 7. Further Assistance
 
-For any further questions or issues, please refer to the main `README.md` or contact the NSR-AI development team (blackforge31@gmail.com).
+For any further questions or issues, please refer to the main `README.md` or open an issue in this repository.
 
-## 9. Addon Recommendations & Freedom of Development
+## 8. Addon Recommendations & Freedom of Development
 
 We want to encourage you to build whatever you can imagine! The NSR-AI ecosystem thrives on developer creativity, and we want to see your unique ideas come to life.
 
