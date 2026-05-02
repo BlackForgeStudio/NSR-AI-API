@@ -1,6 +1,6 @@
 {
   "plugin": {
-    "latest_version": "1.4",
+    "latest_version": "1.5",
     "features": [
       "New API v3.0-pre: simple one-line addon & plugin registration.",
       "Interceptor system: read, edit or cancel player input & AI responses.",
