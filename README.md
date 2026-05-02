@@ -146,16 +146,23 @@ Developers should depend on specific version tags (e.g., `1.2.0`) for stability.
 *   **Developer Guide:** For detailed information on API usage, versioning, and feature detection, please refer to [DEVELOPER.md](DEVELOPER.md).
 *   **Security Policy:** For information on addon compliance, prohibited actions, and security updates, please refer to [SECURITY.md](SECURITY.md).
 
-## full repo tree of BlackForge-31/NSR-AI:
+## full repo tree of BlackForgeStudio/NSR-AI:
 
 ```directory tree
-NSR-AI/
+NSR-AI-API/
 ├── .github/
+│   └── ISSUE_TEMPLATE/
+│       ├── api_bug_report.yml
+│       ├── api_feature_request.yml
+│       ├── bug_report.yml
+│       └── feature_request.yml
+│
 ├── DEVELOPER.md
 ├── LICENSE.txt
 ├── README.md
 ├── SECURITY.md
 ├── pom.xml
+│
 └── src/
     └── main/
         └── java/
@@ -163,14 +170,28 @@ NSR-AI/
                 └── nsr/
                     └── ai/
                         └── api/
-                             ├── AIAddon.java
-                             ├── AIInterceptor.java
-                             ├── AIPet.java
-                             ├── AskAI.java
-                             ├── NSRaiAPI.java
-                             ├── SaveMsg.java
-                             ├── SendChat.java
-                             └── SimpleAddon.java
+                            ├── AddonInfo.java
+                            ├── AIAddon.java
+                            ├── AIInterceptor.java
+                            ├── AIMessage.java
+                            ├── AIPet.java
+                            ├── AIResponse.java
+                            ├── AskAI.java
+                            ├── CustomGUIProvider.java
+                            ├── GUIBuilder.java
+                            ├── GUIListener.java
+                            ├── NPCListener.java
+                            ├── NSRAI.java
+                            ├── NSRaiAPI.java
+                            ├── PetDataSnapshot.java
+                            ├── PetListener.java
+                            ├── SaveMsg.java
+                            ├── SecurityStatus.java
+                            ├── SendChat.java
+                            ├── SimpleAddon.java
+                            │
+                            └── events/
+                                └── AIChatEvent.java
 ```
 
 ## For Addon Developers
