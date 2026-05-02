@@ -1,6 +1,6 @@
 # NSR-AI Open-Source API
 
-![Version](https://img.shields.io/badge/Version-1.6.1--pre-blue.svg)
+![Version](https://img.shields.io/badge/Version-3.0--pre-blue.svg)
 
 This is the official open-source API for the NSR-AI Minecraft Plugin. It allows developers to interact with core NSR-AI functionalities in a safe and controlled manner.
 
@@ -14,30 +14,63 @@ Add the following to your `pom.xml`:
     <dependency>
         <groupId>com.nsr-ai</groupId>
         <artifactId>nsr-ai-api</artifactId>
-        <version>1.6.1-pre</version> <!-- Use the current API version -->
+        <version>3.0-pre</version> <!-- Use the current API version -->
         <scope>provided</scope>
     </dependency>
 </dependencies>
 ```
 
-## Features Available in API Version 2
+*   **Knowledge Base Bridge (RAG):** Programmatically read, add, or remove entries from the server's `knowledge.yml`.
+*   **Pet AI System (AIPet):** Programmatically access and modify pet data (Bond, Mood, Hunger, Level) using the `AIPet` class.
+*   **Universal Command Routing (`/aia`):** Delegate complex command structures and tab completion to your addon via the `/aia` namespace.
+*   **Chat Interceptor System (Middleware):** Register an `AIInterceptor` to read, modify, or cancel player inputs, AI responses, and **system prompts**.
+*   **Flexible AI Parameters:** Control `Temperature`, `Top-P`, `Top-K`, and `Max Tokens` programmatically for each AI request.
+*   **Asynchronous Architecture:** All AI requests and file operations (`SaveMsg`) are non-blocking, ensuring maximum server performance (20 TPS).
+*   **Custom Parameter Injection:** Inject provider-specific JSON parameters (like `presence_penalty`) into the request body.
+*   **Plugin Integrations:** Standard Bukkit Plugins can now officially register their integrations directly with NSR-AI using `NSRaiAPI.registerPlugin()`.
+*   **SimpleAddon Builder:** Enhanced with `.onTabCompleteHandler()` and command mapping logic.
+*   **Chat System Isolation:** `NSRaiAPI.askAI()` now provides a clean AI context without core plugin prompt injection.
+*   **Async Persistence (SaveMsg):** Use `SaveMsg` to save data in JSON, YML, TXT, or DAT formats asynchronously without blocking the main thread.
 
-*   **AIAddon Interface Enhancements:** Addons now implement `getName()`, `getVersion()`, `getAuthor()`, `onEnable(Plugin plugin)`, and `onDisable()` for better lifecycle management and information retrieval.
-*   **Chat System:** Send messages to AI, get AI responses (asynchronous). (properly working)
-*   **Pet System:** Get pet data, register pet listeners. (Experiment)
-*   **NPC System:** Register NPC listeners, update NPC skins. (Experiment)
-*   **Memory System:** Provides methods to access and update shared memory. (Note: This feature is currently a placeholder and will log warnings upon use).
-*   **Versioning:** Get plugin version.
-*   **Security System:** (Conditional) Provides methods to retrieve the current security status. Calling these methods will throw an `IllegalStateException` if the Security system is not enabled in the core plugin.
+## Example: The Easiest Way to Register (SimpleAddon)
 
-## Example: Addon Structure and Lifecycle
+With the introduction of the `SimpleAddon` builder and `NSRaiAPI.registerAddon()`, any standard Bukkit plugin can act as an NSR-AI addon natively! 
+You no longer need to create an `addon.yml` or place your jar in the `addons` folder. Just do this in your plugin's `onEnable()`:
 
-This example demonstrates the basic structure of an NSR-AI addon, including the implementation of the `AIAddon` interface and its lifecycle methods.
+```java
+import com.nsr.ai.api.NSRaiAPI;
+import com.nsr.ai.api.SimpleAddon;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class MyPlugin extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        // Build your addon in just a few lines
+        SimpleAddon myAddon = new SimpleAddon("MyPluginAddon", "1.0", "YourName", "My awesome NSR-AI Integration")
+            .setAlias("myplugin") // Users type /aia myplugin ...
+            .addFeature("keyword", "Description of what this feature does")
+            .addCommand("mycmd", "What this command does")
+            .onCommandExecution((player, args) -> {
+                player.sendMessage("AI Command executed successfully!");
+                return "Handled successfully!";
+            });
+
+        // Register it natively via the API as a Plugin Integration!
+        NSRaiAPI.registerPlugin(this, myAddon);
+    }
+}
+```
+
+## Advanced Example: Implementing AIAddon (Legacy/Detailed method)
+
+If you need deeper control, you can implement the `AIAddon` interface directly. Because of default methods, you only need to override what you actually use:
 
 ```java
 import com.nsr.ai.api.AIAddon;
 import com.nsr.ai.plugin.NSRAIPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -46,13 +79,10 @@ import org.bukkit.entity.Player;
 public class MyAddon extends JavaPlugin implements AIAddon {
 
     @Override
-    public void onEnable(Plugin plugin) {
+    public void onEnable() {
+        // You can register yourself!
+        com.nsr.ai.api.NSRaiAPI.registerPlugin(this, this);
         getLogger().info("MyAddon enabled!");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("MyAddon disabled!");
     }
 
     @Override
@@ -71,19 +101,14 @@ public class MyAddon extends JavaPlugin implements AIAddon {
     }
 
     @Override
+    public String getDescription() {
+        return getDescription().getDescription();
+    }
+
+    @Override
     public String onCommand(Player player, String[] args) {
         // ... command handling logic
         return null;
-    }
-
-    @Override
-    public Map<String, String> getCommands() {
-        return new HashMap<>();
-    }
-
-    @Override
-    public Map<String, String> getFeatures() {
-        return new HashMap<>();
     }
 }
 ```
@@ -93,7 +118,6 @@ public class MyAddon extends JavaPlugin implements AIAddon {
 This API layer *does not* include any of the proprietary or closed-source features of the main NSR-AI plugin, such as:
 
 *   NPC AI System (Spawning, Pathfinding, Interactions) – Upcoming Feature (Coming Soon)
-*   Pet AI System (Taming, Behaviors, Communication) – Implemented, under testing for API compatibility
 *   Advanced Memory System for AI Entities – Implemented, currently in testing phase
 *   Offline AI integrations (e.g., Ollama, LLaMA, local models)
 *   Direct API key expansions for external services (e.g., Gemini, OpenAI, Claude)
@@ -126,12 +150,11 @@ Developers should depend on specific version tags (e.g., `1.2.0`) for stability.
 
 ```directory tree
 NSR-AI/
-├── .gitignore
+├── .github/
 ├── DEVELOPER.md
 ├── LICENSE.txt
 ├── README.md
 ├── SECURITY.md
-├── _config.yml
 ├── pom.xml
 └── src/
     └── main/
@@ -140,26 +163,30 @@ NSR-AI/
                 └── nsr/
                     └── ai/
                         └── api/
-                            ├── events/
-                            │   └── (event classes here)
-                            ├── AIAddon.java
-                            ├── AIMessage.java
-                            ├── AIResponse.java
-                            ├── GUIBuilder.java
-                            ├── GUIListener.java
-                            ├── NPCListener.java
-                            ├── NSRAI.java
-                            ├── NSRaiAPI.java
-                            ├── PetDataSnapshot.java
-                            ├── PetListener.java
-                            └── SecurityStatus.java
+                             ├── AIAddon.java
+                             ├── AIInterceptor.java
+                             ├── AIPet.java
+                             ├── AskAI.java
+                             ├── NSRaiAPI.java
+                             ├── SaveMsg.java
+                             ├── SendChat.java
+                             └── SimpleAddon.java
 ```
 
 ## For Addon Developers
 
-If you are developing an addon for NSR-AI, please adhere to the following critical guidelines:
+If you are developing an addon for NSR-AI, there are now two ways to integrate:
 
-*   **Installation Path:** Addon JAR files must be placed in `/plugins/NSR-AI/addons/` to be loaded correctly. You must instruct your users to do this.
-*   **Command Prefixes:** All addon commands must start with `/ai` followed by the addon's specific subcommand (e.g., `/ai joke`).
-*   **Addon Configuration:** Your addon must include an `addon.yml` file in its resources. This file provides metadata for the addon manager (name, version, author, main class).
+**1. The Plugin Approach (Recommended):**
+*   Create a standard Bukkit plugin with `plugin.yml`.
+*   Use `NSRaiAPI.registerPlugin(this, new SimpleAddon(...))` inside your `onEnable()`.
+*   Users can put your jar in the standard `plugins/` folder!
+
+**2. The Standalone Addon Approach:**
+*   For addons specifically built outside of standard plugins, use `NSRaiAPI.registerAddon(new SimpleAddon(...))`.
+*   Alternatively, Legacy Addon JAR files must be placed in `/plugins/NSR-AI/addons/` with an `addon.yml` file.
+
+**Command Rules (For both approaches):**
+*   **Core Plugin**: Commands starting with `/ai` are strictly reserved for core features (Chat, API Keys, Admin).
+*   **Addons**: All addon commands must start with `/aia` followed by the addon's unique **alias** (e.g., `/aia myaddon stats`).
 

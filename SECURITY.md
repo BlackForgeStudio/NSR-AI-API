@@ -22,6 +22,7 @@ As per the Commons Clause in our `LICENSE.txt`, and for security reasons, addons
 *   **Creating scripted response systems:** Addons may NOT create pre-made or canned AI response systems that mimic or replace the dynamic AI behavior of NSR-AI.
 *   **Forking or re-implementing core functionality:** You may NOT fork or re-implement the core functionality of NSR-AI to bypass its monetization, security, or intended functionality.
 *   **Storing or revealing API keys:** Addons must NEVER store, log, or reveal API keys or other sensitive information obtained from or used by the NSR-AI plugin.
+*   **Abusing Interceptor Permissions:** Addons using `AIInterceptor` must respect server-wide and per-addon permissions set in `permissions.yml`. Any attempt to bypass these restrictions will result in an immediate ban.
 
 ## Security Updates
 
