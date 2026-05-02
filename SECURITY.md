@@ -31,7 +31,7 @@ As per the Commons Clause in our `LICENSE.txt`, and for security reasons, addons
 
 ## Reporting Security Issues
 
-If you discover a security vulnerability or suspect a non-compliant addon, please report it immediately to [Your Security Contact/Email/Discord] to help us maintain a secure environment for all users.
+If you discover a security vulnerability or suspect a non-compliant addon, please report it immediately by opening issue on this repo to help us maintain a secure environment for all users.
 
 ---
 *This policy is subject to change. Please refer to the latest version for up-to-date information.*
