@@ -146,7 +146,7 @@ Developers should depend on specific version tags (e.g., `1.2.0`) for stability.
 *   **Developer Guide:** For detailed information on API usage, versioning, and feature detection, please refer to [DEVELOPER.md](DEVELOPER.md).
 *   **Security Policy:** For information on addon compliance, prohibited actions, and security updates, please refer to [SECURITY.md](SECURITY.md).
 
-## full repo tree of BlackForgeStudio/NSR-AI:
+## full repo tree of BlackForgeStudio/NSR-AI-API:
 
 ```directory tree
 NSR-AI-API/
