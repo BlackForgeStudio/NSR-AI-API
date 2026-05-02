@@ -1,0 +1,29 @@
+{
+  "plugin": {
+    "latest_version": "1.4",
+    "features": [
+      "New API v3.0-pre: simple one-line addon & plugin registration.",
+      "Interceptor system: read, edit or cancel player input & AI responses.",
+      "Async API: askAI & sendMsg return CompletableFuture, zero server lag.",
+      "Per-request model & provider override (Gemini, Claude, OpenAI).",
+      "Privacy system: opt-in anonymization, blocks addon access to private chats.",
+      "Pet API: get/set mood, bond, hunger & level programmatically.",
+      "Shared memory store for cross-addon context sharing.",
+      "Component reload: FULL / CONFIG / KNOWLEDGE / FEATURES.",
+      "Unified /aia addon command namespace with tab completion.",
+      "Security: validatePlugin() bans Bukkit plugins from API bridge.",
+      "Major RAM & CPU optimizations, ~500 lines of dead code removed."
+    ]
+  },
+  "security": {
+    "version": "3.5",
+    "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/security/security-3.5.jar"
+  },
+  "bugfix_mapping": {
+    "1.4": {
+      "version": "1.4",
+      "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/bug/NSR-AI-1.4/NSR-AI-1.4.jar",
+      "restart_required": true
+    }
+  }
+}
