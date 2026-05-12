@@ -117,8 +117,6 @@ public class MyAddon extends JavaPlugin implements AIAddon {
 
 This API layer *does not* include any of the proprietary or closed-source features of the main NSR-AI plugin, such as:
 
-*   NPC AI System (Spawning, Pathfinding, Interactions) – Upcoming Feature (Coming Soon)
-*   Advanced Memory System for AI Entities – Implemented, currently in testing phase
 *   Offline AI integrations (e.g., Ollama, LLaMA, local models)
 *   Direct API key expansions for external services (e.g., Gemini, OpenAI, Claude)
 *   Scripted or canned response systems
