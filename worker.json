@@ -50,25 +50,6 @@
       "restart_required": true,
       "features": [ "No bug version is released for this version."]
     },
-    "2.0-pre": {
-      "version": "2.0-pre",
-      "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/bug/NSR-AI-2.0/NSR-AI-2.0-pre.jar",
-      "restart_required": true,
-      "features": [
-        "Initial release of NSR-AI v2.0-pre (Utility, Automation & Command Mastery Update)",
-        "Added autonomous in-game tool-calling loop (ReAct agent) with 10 native tools",
-        "Added Auto-Crafting engine (auto_craft) with recursive parent material breakdown",
-        "Added slot-by-slot inventory GUI layout (0-40) and vitals inspection (get_inventory)",
-        "Added 360-degree spatial radar (get_world_environment) with 32-block spherical threat detection",
-        "Added inventory grid sorting (9-35), hotbar staging (0-8), and equipment handling (inv_arrange)",
-        "Added zero-penalty binary merge anvil enchantment sequencing (anvil_enchant_optimizer)",
-        "Added multi-command batch execution (execute_command) and interactive security approvals (execute_command_with_approval)",
-        "Added dynamic custom tools engine (CustomToolManager) supporting YAML, ES6 JavaScript, folder packages, and ZIPs",
-        "Added tool inspection and live hot-reloading commands: /ai tools, /ai tools <name>, /ai tools reload, and /ai reload tools",
-        "Added normalized multi-chunk SSE streaming across Google Gemini, Anthropic Claude, and OpenAI backends",
-        "Added dual-tier long-term player memory (pin_knowledge) with personality prompt injection and auto-RAG spatial waypoints"
-      ]
-    },
     "2.0": {
       "version": "2.0-pre",
       "download_url": "https://github.com/BlackForgeStudio/NSR-AI-API/raw/refs/heads/backend/bug/NSR-AI-2.0/NSR-AI-2.0-pre.jar",
